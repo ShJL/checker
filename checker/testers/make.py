@@ -15,6 +15,7 @@ class MakeTester(Tester):
         test_timeout: int = 60  # seconds
 
         public_test_files: list[str] = field(default_factory=list)
+        allow_change: list[str] = field(default_factory=list)
 
     def _gen_build(  # type: ignore[override]
             self,
@@ -40,6 +41,7 @@ class MakeTester(Tester):
             source=public_tests_dir,
             target=build_dir,
             patterns=test_config.public_test_files,
+            ignore_patterns=test_config.allow_change,
             verbose=verbose,
         )
 
